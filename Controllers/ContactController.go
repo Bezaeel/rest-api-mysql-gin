@@ -3,15 +3,15 @@ package Controllers
 import (
 	"fmt"
 	"net/http"
-
 	"github.com/bezaeel/rest-api-mysql-gin/Models"
+	"github.com/bezaeel/rest-api-mysql-gin/Services"
 	"github.com/gin-gonic/gin"
 )
 
 //GetAllContacts
 func GetAllContacts(c *gin.Context) {
 	var contact []Models.Contact
-	err := Models.GetAllContacts(&contact)
+	err := Services.GetAllContacts(&contact)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
@@ -22,7 +22,7 @@ func GetAllContacts(c *gin.Context) {
 func AddContact(c *gin.Context) {
 	var contact Models.Contact
 	c.BindJSON(&contact)
-	err := Models.CreateContact(&contact)
+	err := Services.CreateContact(&contact)
 	if err != nil {
 		fmt.Printf("Error creating user: %s", err.Error())
 		c.AbortWithStatus(http.StatusInternalServerError)

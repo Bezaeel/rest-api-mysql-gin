@@ -1,11 +1,13 @@
-package Models
+package Services
 
 import (
+	"github.com/bezaeel/rest-api-mysql-gin/Models"
+
 	"github.com/bezaeel/rest-api-mysql-gin/Config"
 )
 
 //GetAllContacts
-func GetAllContacts(contact *[]Contact) (err error) {
+func GetAllContacts(contact *[]Models.Contact) (err error) {
 	if err = Config.DB.Find(contact).Error; err != nil {
 		return err
 	}
@@ -13,7 +15,7 @@ func GetAllContacts(contact *[]Contact) (err error) {
 }
 
 //CreateContact
-func CreateContact(contact *Contact) (err error) {
+func CreateContact(contact *Models.Contact) (err error) {
 	if err = Config.DB.Create(contact).Error; err != nil {
 		return err
 	}
