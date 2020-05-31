@@ -8,12 +8,13 @@ import (
 //configure routes
 func SetUpRoutes() *gin.Engine {
 	r := gin.Default()
-	grpl := r.Group("/contacts")
+	grpl := r.Group("/api")
 	{
-		grpl.GET("all", Controllers.GetAllContacts)
-		grpl.POST("add", Controllers.AddContact)
-		grpl.PUT("edit/:id", Controllers.UpdateContact)
-		grpl.DELETE("remove/:id", Controllers.DeleteContact)
+		grpl.GET("contacts/all", Controllers.GetAllContacts)
+		grpl.POST("contacts/add", Controllers.AddContact)
+		grpl.GET("GetContact/:id", Controllers.GetContactById)
+		grpl.PUT("contacts/:id/edit", Controllers.UpdateContact)
+		grpl.DELETE("contacts/:id/remove", Controllers.DeleteContact)
 	}
 	return r
 }

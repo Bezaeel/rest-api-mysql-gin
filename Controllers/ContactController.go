@@ -6,18 +6,47 @@ import (
 
 	"github.com/bezaeel/rest-api-mysql-gin/Models"
 	"github.com/bezaeel/rest-api-mysql-gin/Services"
+	"github.com/bezaeel/rest-api-mysql-gin/Communication"
 	"github.com/gin-gonic/gin"
 )
+
+//var apiResponse = new(ApiResponse.Response)
 
 //GetAllContacts
 func GetAllContacts(c *gin.Context) {
 	var contact []Models.Contact
+	// var apiResponse Communication.apiResponse.apiResponse
+	var apiResponse = new(ApiResponse.Response)
+
 	err := Services.GetAllContacts(&contact)
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+
+		c.JSON(http.StatusNotFound, apiResponse)
 		return
 	} else {
-		c.JSON(http.StatusOK, contact)
+		apiResponse.IsSuccess = true
+		apiResponse.Message = "Success"
+		apiResponse.Data = contact
+		c.JSON(http.StatusOK, apiResponse)
+		return
+	}
+}
+
+func GetContactById(c *gin.Context) {
+	var contact Models.Contact
+	var apiResponse = new(ApiResponse.Response)
+	id := c.Params.ByName("id")
+	err := Services.GetContactById(id, &contact)
+	if err != nil {
+		// apiResponse.IsSuccess = false
+		apiResponse.Message = err.Error()
+		c.JSON(http.StatusNotFound, apiResponse)
+		return
+	} else {
+		apiResponse.IsSuccess = true
+		apiResponse.Message = "Success"
+		apiResponse.Data = contact
+		c.JSON(http.StatusOK, apiResponse)
 		return
 	}
 }
@@ -25,13 +54,18 @@ func GetAllContacts(c *gin.Context) {
 func AddContact(c *gin.Context) {
 	var contact Models.Contact
 	c.BindJSON(&contact)
+	var apiResponse = new(ApiResponse.Response)
 	err := Services.CreateContact(&contact)
 	if err != nil {
 		fmt.Printf("Error creating user: %s", err.Error())
-		c.AbortWithStatus(http.StatusInternalServerError)
+		apiResponse.Message = err.Error()
+		c.JSON(http.StatusInternalServerError, apiResponse)
 		return
 	} else {
-		c.JSON(http.StatusOK, contact)
+		apiResponse.IsSuccess = true
+		apiResponse.Message = "Success"
+		apiResponse.Data = contact
+		c.JSON(http.StatusOK, apiResponse)
 		return
 	}
 }
@@ -39,18 +73,24 @@ func AddContact(c *gin.Context) {
 func UpdateContact(c *gin.Context) {
 	var contact Models.Contact
 	id := c.Params.ByName("id")
+	var apiResponse = new(ApiResponse.Response)
 	err := Services.GetContactById(id, &contact)
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+		apiResponse.Message = err.Error()
+		c.JSON(http.StatusNotFound, apiResponse)
 		return
 	} else {
 		c.BindJSON(&contact)
 		err := Services.UpdateContact(id, &contact)
 		if err != nil {
-			c.AbortWithStatus(http.StatusNotFound)
+			apiResponse.Message = err.Error()
+			c.JSON(http.StatusInternalServerError, apiResponse)
 			return
 		}
-		c.JSON(http.StatusOK, contact)
+		apiResponse.IsSuccess = true
+		apiResponse.Message = "contact with id: " + id + " updated successfully"
+		apiResponse.Data = contact
+		c.JSON(http.StatusOK, apiResponse)
 		return
 	}
 }
@@ -58,17 +98,22 @@ func UpdateContact(c *gin.Context) {
 func DeleteContact(c *gin.Context) {
 	var contact Models.Contact
 	id := c.Params.ByName("id")
+	var apiResponse = new(ApiResponse.Response)
 	err := Services.GetContactById(id, &contact)
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+		apiResponse.Message = err.Error()
+		c.JSON(http.StatusNotFound, apiResponse)
 		return
 	}
 	err = Services.DeleteContact(id, &contact)
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+		apiResponse.Message = err.Error()
+		c.JSON(http.StatusInternalServerError, apiResponse)
 		return
 	}
-	message := "contact with id: " + id + " deleted successfully"
-	c.JSON(http.StatusOK, gin.H{"message": message})
+	apiResponse.IsSuccess = true
+	apiResponse.Message = "contact with id: " + id + " deleted successfully"
+	apiResponse.Data = contact
+	c.JSON(http.StatusOK, apiResponse)
 	return
 }
