@@ -1,4 +1,4 @@
-package Models
+package contact
 
 type Contact struct {
 	Id      uint   `json:"id"`
@@ -8,6 +8,7 @@ type Contact struct {
 	Address string `json:"address"`
 }
 
-func (b *Contact) TableName() string {
+func (c Contact) TableName() string {
 	return "contacts"
 }
+
