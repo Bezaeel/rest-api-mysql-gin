@@ -12,6 +12,8 @@ func SetUpRoutes() *gin.Engine {
 	{
 		grpl.GET("all", Controllers.GetAllContacts)
 		grpl.POST("add", Controllers.AddContact)
+		grpl.PUT("edit/:id", Controllers.UpdateContact)
+		grpl.DELETE("remove/:id", Controllers.DeleteContact)
 	}
 	return r
 }
