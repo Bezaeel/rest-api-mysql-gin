@@ -1,4 +1,4 @@
-module github.com/bezaeel/rest-api-mysql-gin
+module github.com/bezaeel/rest-api-mysql-gin/src
 
 go 1.14
 

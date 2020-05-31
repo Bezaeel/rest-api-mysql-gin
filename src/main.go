@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/bezaeel/rest-api-mysql-gin/Config"
-	"github.com/bezaeel/rest-api-mysql-gin/Models"
-	Routes "github.com/bezaeel/rest-api-mysql-gin/Routes"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Config"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Models"
+	Routes "github.com/bezaeel/rest-api-mysql-gin/src/Routes"
 
 	"fmt"
 

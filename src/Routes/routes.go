@@ -1,7 +1,7 @@
 package Routes
 
 import (
-	"github.com/bezaeel/rest-api-mysql-gin/Controllers"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Controllers"
 	"github.com/gin-gonic/gin"
 )
 

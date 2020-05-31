@@ -1,9 +1,8 @@
 package Services
 
 import (
-	"github.com/bezaeel/rest-api-mysql-gin/Models"
-
-	"github.com/bezaeel/rest-api-mysql-gin/Config"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Models"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Config"
 )
 
 //GetAllContacts

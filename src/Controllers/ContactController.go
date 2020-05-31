@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bezaeel/rest-api-mysql-gin/Models"
-	"github.com/bezaeel/rest-api-mysql-gin/Services"
-	"github.com/bezaeel/rest-api-mysql-gin/Communication"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Models"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Services"
+	"github.com/bezaeel/rest-api-mysql-gin/src/Communication"
 	"github.com/gin-gonic/gin"
 )
 
