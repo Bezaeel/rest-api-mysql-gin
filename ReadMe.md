@@ -10,11 +10,11 @@ Demo CRUD API golang project - contacts manager
 
 ## Screenshots from Postman
 AddContact
-![AddContact](./assets/AddContact.png "Title")
+![AddContact](./assets/AddContact.PNG "Title")
 
 Error_GetContact
-![Error_GetContact](./assets/Error_GetContactById.png "Title")
+![Error_GetContact](./assets/Error_GetContactById.PNG "Title")
 
 GetContact
-![GetContact](./assets/GetContactById.png "Title")
+![GetContact](./assets/GetContactById.PNG "Title")
 
